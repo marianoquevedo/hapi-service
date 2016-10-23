@@ -14,6 +14,9 @@ internals.getOrganizationById = function (id) {
     return Organization.findById(id, internals.fieldsToReturn)
       .then((org) => {
 
+          if (org === null) {
+              return Boom.notFound();
+          }
           return org;
       })
       .catch((err) => {
