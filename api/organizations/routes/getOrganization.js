@@ -6,11 +6,7 @@ const Organization = require('../model/Organization');
 
 const internals = {};
 
-internals.fieldsToReturn = {
-    name: 1,
-    description: 1,
-    type: 1
-};
+internals.fieldsToReturn = require('../helpers/fieldsToReturn');
 
 internals.getAllOrganizations = function () {
 

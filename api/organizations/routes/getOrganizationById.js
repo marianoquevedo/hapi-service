@@ -7,11 +7,7 @@ const internals = {};
 
 internals.validateObjectId = require('../helpers/validateObjectId');
 
-internals.fieldsToReturn = {
-    name: 1,
-    description: 1,
-    type: 1
-};
+internals.fieldsToReturn = require('../helpers/fieldsToReturn');
 
 internals.getOrganizationById = function (id) {
 
