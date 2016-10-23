@@ -11,6 +11,18 @@ const organizationModel = new Schema({
     description: {
         type: String,
         required: true
+    },
+    url: {
+        type: String,
+        required: true
+    },
+    code: {
+        type: Number,
+        required: true
+    },
+    type: {
+        type: String,
+        required: true
     }
 });
 

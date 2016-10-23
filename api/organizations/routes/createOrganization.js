@@ -11,6 +11,9 @@ internals.requestHandler = function (request, reply) {
     const organization = new Organization();
     organization.name = request.payload.name;
     organization.description = request.payload.description;
+    organization.url = request.payload.url;
+    organization.code = request.payload.code;
+    organization.type = request.payload.type;
 
     return reply(organization.save()
       .then((createdOrganization) => {
