@@ -2,6 +2,7 @@
 
 const Boom = require('boom');
 const Organization = require('../model/Organization');
+const CreateOrganizationSchema = require('../validation/createOrganizationSchema');
 
 const internals = {};
 
@@ -25,5 +26,10 @@ internals.requestHandler = function (request, reply) {
 module.exports = {
     path: '/api/organizations',
     method: 'POST',
-    handler: internals.requestHandler
+    handler: internals.requestHandler,
+    config: {
+        validate: {
+            payload: CreateOrganizationSchema
+        }
+    }
 };
