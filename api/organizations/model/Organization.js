@@ -17,12 +17,21 @@ const organizationModel = new Schema({
         required: true
     },
     code: {
-        type: Number,
+        type: String,
         required: true
     },
     type: {
         type: String,
         required: true
+    }
+}, {
+    toJSON: {
+        transform: function (doc, ret) {
+            // remove the _id of every document before returning the result
+            ret.id = ret._id;
+            delete ret._id;
+            delete ret.__v;
+        }
     }
 });
 
