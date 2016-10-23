@@ -27,7 +27,6 @@ internals.filterOrganizations = function (queryParams) {
     let fieldsToReturn = internals.fieldsToReturn;
 
     if (queryParams.name) {
-        // 
         query = {
             $text : {
                 $search : queryParams.name
