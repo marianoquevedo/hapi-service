@@ -13,8 +13,6 @@ internals.fieldsToReturn = {
 
 internals.getAllOrganizations = function () {
 
-    console.log('### getAllOrganizations fieldsToReturn', internals.fieldsToReturn);
-
     return Organization.find({}, internals.fieldsToReturn)
       .then((orgs) => {
 
@@ -30,8 +28,6 @@ internals.filterOrganizations = function (queryParams) {
 
     const criteria = [];
     let fieldsToReturn = internals.fieldsToReturn;
-
-    console.log('### filter fieldsToReturn', fieldsToReturn);
 
     if (queryParams.name) {
         criteria.push({ 'name' : queryParams.name });
