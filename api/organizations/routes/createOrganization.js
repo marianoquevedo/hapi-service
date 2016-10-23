@@ -22,8 +22,8 @@ internals.requestHandler = function (request, reply) {
       })
       .catch((err) => {
 
-          throw Boom.badRequest(err);
-      }));
+          return Boom.badImplementation(err);
+      })).code(201);
 };
 
 module.exports = {

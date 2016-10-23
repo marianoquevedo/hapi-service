@@ -20,7 +20,7 @@ internals.getAllOrganizations = function () {
       })
       .catch((err) => {
 
-          throw err;
+          return Boom.badImplementation(err);
       });
 };
 
@@ -52,7 +52,7 @@ internals.filterOrganizations = function (queryParams) {
       })
       .catch((err) => {
 
-          throw err;
+          return Boom.badImplementation(err);
       });
 };
 
