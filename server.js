@@ -3,7 +3,6 @@
 
 const Hapi = require('hapi');
 const Mongoose = require('mongoose');
-const Poop = require('poop');
 const Glob = require('glob');
 const Path = require('path');
 
@@ -46,19 +45,6 @@ internals.init = function () {
     // connect to Mongo
     internals.connectToDatabase()
         .then(() =>  {
-
-            // register poop plugin
-            server.register({
-                register: Poop,
-                options: {
-                    logPath: Path.join(__dirname, 'poop.log')
-                }
-            }, (err) => {
-
-                if (err) {
-                    console.error('Failed to load plugin:', err);
-                }
-            });
 
             // start the server
             server.start()
