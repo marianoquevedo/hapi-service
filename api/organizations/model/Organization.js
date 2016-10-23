@@ -35,4 +35,6 @@ const organizationModel = new Schema({
     }
 });
 
+organizationModel.index({ name: 'text' });
+
 module.exports = Mongoose.model('Organization', organizationModel);

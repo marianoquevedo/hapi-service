@@ -26,11 +26,16 @@ internals.getAllOrganizations = function () {
 
 internals.filterOrganizations = function (queryParams) {
 
-    const criteria = [];
+    let query = {};
     let fieldsToReturn = internals.fieldsToReturn;
 
     if (queryParams.name) {
-        criteria.push({ 'name' : queryParams.name });
+        // 
+        query = {
+            $text : {
+                $search : queryParams.name
+            }
+        };
     }
 
     if (queryParams.code) {
@@ -39,13 +44,13 @@ internals.filterOrganizations = function (queryParams) {
             code: 1
         }, internals.fieldsToReturn);
 
-        criteria.push({ 'code' : queryParams.code });
+        query = {
+            'code': queryParams.code
+        };
     }
 
     return Organization
-      .find({
-          $or : criteria
-      }, fieldsToReturn)
+      .find(query, fieldsToReturn)
       .then((orgs) => {
 
           return orgs;

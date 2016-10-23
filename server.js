@@ -49,7 +49,7 @@ internals.init = function () {
             // start the server
             server.start()
                 .then(() => {
-
+                    
                     console.log('Server running at:', server.info.uri);
                 })
                 .catch((err) => {
