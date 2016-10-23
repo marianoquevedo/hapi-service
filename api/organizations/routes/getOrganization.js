@@ -1,5 +1,6 @@
 'use strict';
 
+const Boom = require('boom');
 const Util = require('util');
 const Organization = require('../model/Organization');
 
