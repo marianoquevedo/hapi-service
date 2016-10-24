@@ -41,7 +41,7 @@ internals.registerPlugins = function (server) {
         options: {
             validVersions: [1, 2],
             defaultVersion: 2,
-            vendorName: 'hapi-service'
+            vendorName: 'hapiservice'
         }
     });
 

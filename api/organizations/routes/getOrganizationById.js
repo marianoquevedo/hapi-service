@@ -8,21 +8,21 @@ const internals = {};
 
 internals.validateObjectId = require('../helpers/validateObjectId');
 
-internals.outputKeys = require('../helpers/outputKeys');
+internals.outputFields = require('../helpers/outputFields');
 
 internals.getOrganizationById = function (apiVersion, id) {
 
-    let outputKeys = internals.outputKeys;
+    let outputFields = internals.outputFields;
 
     // API Version 1 returns all the fields
     if (apiVersion === 1) {
-        outputKeys = Util._extend({
+        outputFields = Util._extend({
             url: 1,
             code: 1
-        }, internals.outputKeys);
+        }, internals.outputFields);
     }
 
-    return Organization.findById(id, outputKeys)
+    return Organization.findById(id, outputFields)
       .then((org) => {
 
           if (org === null) {

@@ -27,7 +27,7 @@ const organizationModel = new Schema({
 }, {
     toJSON: {
         transform: function (doc, ret) {
-            // remove the _id of every document before returning the result
+            // rename the _id field of every document
             ret.id = ret._id;
             delete ret._id;
             delete ret.__v;

@@ -6,42 +6,19 @@ const Organization = require('../model/Organization');
 
 const internals = {};
 
-internals.outputKeys = require('../helpers/outputKeys');
+internals.outputFields = require('../helpers/outputFields');
 
-internals.getAllOrganizations = function (apiVersion) {
-
-    let outputKeys = internals.outputKeys;
-
-    // API Version 1 returns all the fields
-    if (apiVersion === 1) {
-        outputKeys = Util._extend({
-            url: 1,
-            code: 1
-        }, outputKeys);
-    }
-
-    return Organization.find({}, outputKeys)
-      .then((orgs) => {
-
-          return orgs;
-      })
-      .catch((err) => {
-
-          return Boom.badImplementation(err);
-      });
-};
-
-internals.filterOrganizations = function (apiVersion, queryParams) {
+internals.getOrganizations = function (apiVersion, queryParams) {
 
     let query = {};
-    let outputKeys = internals.outputKeys;
+    let outputFields = internals.outputFields;
 
     // API Version 1 returns all the fields
     if (apiVersion === 1) {
-        outputKeys = Util._extend({
+        outputFields = Util._extend({
             url: 1,
             code: 1
-        }, outputKeys);
+        }, outputFields);
     }
 
     if (queryParams.name) {
@@ -53,10 +30,10 @@ internals.filterOrganizations = function (apiVersion, queryParams) {
     }
 
     if (queryParams.code) {
-        outputKeys = Util._extend({
+        outputFields = Util._extend({
             url: 1,
             code: 1
-        }, internals.outputKeys);
+        }, internals.outputFields);
 
         query = {
             'code': queryParams.code
@@ -64,7 +41,7 @@ internals.filterOrganizations = function (apiVersion, queryParams) {
     }
 
     return Organization
-      .find(query, outputKeys)
+      .find(query, outputFields)
       .then((orgs) => {
 
           return orgs;
@@ -79,11 +56,9 @@ internals.requestHandler = function (request, reply) {
 
     const apiVersion = request.pre.apiVersion;
 
-    if (request.query.name || request.query.code) {
-        return reply(internals.filterOrganizations(apiVersion, request.query));
-    }
+    console.log('apiVersion', apiVersion);
 
-    return reply(internals.getAllOrganizations(apiVersion));
+    return reply(internals.getOrganizations(apiVersion, request.query));
 };
 
 module.exports = {
