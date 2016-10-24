@@ -5,6 +5,7 @@ const Hapi = require('hapi');
 const Mongoose = require('mongoose');
 const Glob = require('glob');
 const Path = require('path');
+const TokenValidator = require(Path.join(__dirname, '/api/helpers/tokenValidator'));
 
 const internals = {};
 
@@ -32,11 +33,29 @@ internals.connectToDatabase = function () {
     return Mongoose.connect(dbUrl);
 };
 
+internals.registerPlugins = function (server) {
+
+    server.register(require('hapi-auth-jwt2'), (err) => {
+
+        if (err){
+            console.log('error registering plugins', err);
+        }
+
+        // JWT authentication
+        server.auth.strategy('jwt', 'jwt', {
+            key: 'SecretPassword123',
+            validateFunc: TokenValidator.validate,
+            verifyOptions: { algorithms: ['HS256'] }
+        });
+        server.auth.default('jwt');
+    });
+};
+
 internals.init = function () {
 
     const server = new Hapi.Server();
     server.connection({
-        port: Number(process.argv[2] || 3000)
+        port: Number(process.env.PORT || 3000)
     });
 
     // register routes
@@ -46,10 +65,13 @@ internals.init = function () {
     internals.connectToDatabase()
         .then(() =>  {
 
+            // plugin registration
+            internals.registerPlugins(server);
+
             // start the server
             server.start()
                 .then(() => {
-                    
+
                     console.log('Server running at:', server.info.uri);
                 })
                 .catch((err) => {

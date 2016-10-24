@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "Mariano Quevedo",
   "homepage": "https://github.com/marianoquevedo/pager-backend#readme",
-  "private": false,
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/marianoquevedo/pager-backend"
@@ -26,6 +26,7 @@
     "boom": "^4.2.0",
     "glob": "^7.1.1",
     "hapi": "^15.2.0",
+    "hapi-auth-jwt2": "^7.1.3",
     "joi": "^9.2.0",
     "mongojs": "^2.4.0",
     "mongoose": "^4.6.4"
