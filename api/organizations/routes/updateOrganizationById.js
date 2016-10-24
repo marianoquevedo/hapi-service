@@ -25,6 +25,10 @@ internals.updateOrganizationById = function (id, payload) {
     internals.setFieldsToUpdate('url', payload, fieldsToUpdate);
     internals.setFieldsToUpdate('type', payload, fieldsToUpdate);
 
+    if (fieldsToUpdate.type) {
+        fieldsToUpdate.type = fieldsToUpdate.type.toLowerCase();
+    }
+
     console.log('fieldsToUpdate', fieldsToUpdate);
 
     return Organization.findByIdAndUpdate(id, {

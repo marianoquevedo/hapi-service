@@ -13,7 +13,7 @@ internals.requestHandler = function (request, reply) {
     organization.description = request.payload.description;
     organization.url = request.payload.url;
     organization.code = request.payload.code;
-    organization.type = request.payload.type;
+    organization.type = request.payload.type.toLowerCase();
 
     return reply(organization.save()
       .then((createdOrganization) => {
