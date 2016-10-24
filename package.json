@@ -1,14 +1,14 @@
 {
-  "name": "pager-backend-api",
+  "name": "hapi-service",
   "version": "1.0.0",
-  "description": "Pager Backend API",
+  "description": "hapi restful API",
   "license": "MIT",
   "author": "Mariano Quevedo",
-  "homepage": "https://github.com/marianoquevedo/pager-backend#readme",
+  "homepage": "https://github.com/marianoquevedo/hapi-service#readme",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/marianoquevedo/pager-backend"
+    "url": "https://github.com/marianoquevedo/hapi-service"
   },
   "main": "server.js",
   "scripts": {

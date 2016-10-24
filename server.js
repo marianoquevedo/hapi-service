@@ -25,7 +25,7 @@ internals.registerRoutes = function (server) {
 
 internals.connectToDatabase = function () {
 
-    const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/pager';
+    const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/hapi-service';
 
     // native Node promises
     Mongoose.Promise = global.Promise;
@@ -41,7 +41,7 @@ internals.registerPlugins = function (server) {
         options: {
             validVersions: [1, 2],
             defaultVersion: 2,
-            vendorName: 'pager'
+            vendorName: 'hapi-service'
         }
     });
 
