@@ -2,12 +2,13 @@
 
 const Joi = require('joi');
 const JWT = require('jsonwebtoken');
-const TokenValidator = require.main.require('./api/helpers/tokenValidator');
+const TokenValidator = require.main.require('./api/account/helpers/tokenValidator');
 
 const internals = {};
 
 internals.requestHandler = function (request, reply) {
 
+    // fixed login credentials
     if (request.payload.username === 'admin' && 
         request.payload.password === '123') {
 

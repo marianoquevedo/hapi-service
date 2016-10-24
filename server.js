@@ -5,7 +5,7 @@ const Hapi = require('hapi');
 const Mongoose = require('mongoose');
 const Glob = require('glob');
 const Path = require('path');
-const TokenValidator = require(Path.join(__dirname, '/api/helpers/tokenValidator'));
+const TokenValidator = require(Path.join(__dirname, '/api/account/helpers/tokenValidator'));
 
 const internals = {};
 
