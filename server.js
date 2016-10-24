@@ -43,7 +43,7 @@ internals.registerPlugins = function (server) {
 
         // JWT authentication
         server.auth.strategy('jwt', 'jwt', {
-            key: 'SecretPassword123',
+            key: TokenValidator.secret,
             validateFunc: TokenValidator.validate,
             verifyOptions: { algorithms: ['HS256'] }
         });

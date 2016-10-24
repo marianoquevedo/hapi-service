@@ -1,6 +1,10 @@
 'use strict';
 
-module.exports.validate = function (decoded, request, callback) {
+const internals = {};
+
+internals.secret = process.env.JWT_SECRET || 'SecretPassword123';
+
+internals.validate = function (decoded, request, callback) {
 
     // check if the user is valid
     console.log('validate JWT', decoded);
@@ -12,3 +16,9 @@ module.exports.validate = function (decoded, request, callback) {
     // invalid user
     return callback(null, false);
 };
+
+module.exports = {
+    secret: internals.secret,
+    validate: internals.validate
+};
+

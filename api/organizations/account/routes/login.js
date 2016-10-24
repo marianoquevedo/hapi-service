@@ -2,6 +2,7 @@
 
 const Joi = require('joi');
 const JWT = require('jsonwebtoken');
+const TokenValidator = require.main.require('./api/helpers/tokenValidator');
 
 const internals = {};
 
@@ -15,7 +16,7 @@ internals.requestHandler = function (request, reply) {
             name: 'admin'
         };
 
-        const token = JWT.sign(user, 'SecretPassword123');
+        const token = JWT.sign(user, TokenValidator.secret);
 
         return reply({ token });
     }
