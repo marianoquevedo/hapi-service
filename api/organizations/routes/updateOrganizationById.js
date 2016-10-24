@@ -36,6 +36,9 @@ internals.updateOrganizationById = function (id, payload) {
     }, { new: true })
       .then((org) => {
 
+          if (org === null) {
+              return Boom.notFound();
+          }
           return org;
       })
       .catch((err) => {
