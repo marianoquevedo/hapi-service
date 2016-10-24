@@ -1,2 +1,1 @@
-# pager-backend
-Pager Backend API
+# hapi-service
