@@ -1,17 +1,28 @@
 'use strict';
 
 const Boom = require('boom');
+const Util = require('util');
 const Organization = require('../model/Organization');
 
 const internals = {};
 
 internals.validateObjectId = require('../helpers/validateObjectId');
 
-internals.fieldsToReturn = require('../helpers/fieldsToReturn');
+internals.outputKeys = require('../helpers/outputKeys');
 
-internals.getOrganizationById = function (id) {
+internals.getOrganizationById = function (apiVersion, id) {
 
-    return Organization.findById(id, internals.fieldsToReturn)
+    let outputKeys = internals.outputKeys;
+
+    // API Version 1 returns all the fields
+    if (apiVersion === 1) {
+        outputKeys = Util._extend({
+            url: 1,
+            code: 1
+        }, internals.outputKeys);
+    }
+
+    return Organization.findById(id, outputKeys)
       .then((org) => {
 
           if (org === null) {
@@ -28,11 +39,12 @@ internals.getOrganizationById = function (id) {
 internals.requestHandler = function (request, reply) {
 
     const id = request.params.id;
+    const apiVersion = request.pre.apiVersion;
 
     if (!internals.validateObjectId(id)){
         return reply(Boom.badRequest('Must provide a valid organization id'));
     }
-    return reply(internals.getOrganizationById(request.params.id));
+    return reply(internals.getOrganizationById(apiVersion, request.params.id));
 };
 
 module.exports = {

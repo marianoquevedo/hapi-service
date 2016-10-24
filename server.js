@@ -35,13 +35,23 @@ internals.connectToDatabase = function () {
 
 internals.registerPlugins = function (server) {
 
+    // API version plugin
+    server.register({
+        register: require('hapi-api-version'),
+        options: {
+            validVersions: [1, 2],
+            defaultVersion: 2,
+            vendorName: 'pager'
+        }
+    });
+
+    // JWT authentication plugin
     server.register(require('hapi-auth-jwt2'), (err) => {
 
         if (err){
             console.log('error registering plugins', err);
         }
 
-        // JWT authentication
         server.auth.strategy('jwt', 'jwt', {
             key: TokenValidator.secret,
             validateFunc: TokenValidator.validate,

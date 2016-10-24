@@ -29,8 +29,6 @@ internals.updateOrganizationById = function (id, payload) {
         fieldsToUpdate.type = fieldsToUpdate.type.toLowerCase();
     }
 
-    console.log('fieldsToUpdate', fieldsToUpdate);
-
     return Organization.findByIdAndUpdate(id, {
         $set: fieldsToUpdate
     }, { new: true })

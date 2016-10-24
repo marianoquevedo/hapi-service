@@ -6,9 +6,7 @@ internals.secret = process.env.JWT_SECRET || 'SecretPassword123';
 
 internals.validate = function (decoded, request, callback) {
 
-    // check if the user is valid
-    console.log('validate JWT', decoded);
-
+    // check if the user is valid, expiration date, etc
     if (decoded.id === 1) {
         return callback(null, true);
     }
