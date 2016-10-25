@@ -73,9 +73,11 @@ internals.init = function () {
         server.start()
             .then(internals.connectToDatabase)
             .then(() =>  {
+
                 console.log('Server running at:', server.info.uri);
             })
             .catch((err) => {
+
                 console.log('Error initializing server', err);
                 //throw err;
             });

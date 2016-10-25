@@ -41,15 +41,15 @@ internals.getOrganizations = function (apiVersion, queryParams) {
     }
 
     return Organization
-      .find(query, outputFields)
-      .then((orgs) => {
+        .find(query, outputFields)
+        .then((orgs) => {
 
-          return orgs;
-      })
-      .catch((err) => {
+            return orgs;
+        })
+        .catch((err) => {
 
-          return Boom.badImplementation(err);
-      });
+            return Boom.badImplementation(err);
+        });
 };
 
 internals.requestHandler = function (request, reply) {
