@@ -33,34 +33,6 @@ internals.connectToDatabase = function () {
     return Mongoose.connect(dbUrl);
 };
 
-internals.registerPlugins = function (server) {
-
-    // API version plugin
-    server.register({
-        register: require('hapi-api-version'),
-        options: {
-            validVersions: [1, 2],
-            defaultVersion: 2,
-            vendorName: 'hapiservice'
-        }
-    });
-
-    // JWT authentication plugin
-    server.register(require('hapi-auth-jwt2'), (err) => {
-
-        if (err){
-            console.log('error registering plugins', err);
-        }
-
-        server.auth.strategy('jwt', 'jwt', {
-            key: TokenValidator.secret,
-            validateFunc: TokenValidator.validate,
-            verifyOptions: { algorithms: ['HS256'] }
-        });
-        server.auth.default('jwt');
-    });
-};
-
 internals.init = function () {
 
     const server = new Hapi.Server();
@@ -71,29 +43,43 @@ internals.init = function () {
     // register routes
     internals.registerRoutes(server);
 
-    // connect to Mongo
-    internals.connectToDatabase()
-        .then(() =>  {
+    const plugins = [
+        {
+            register: require('hapi-api-version'),
+            options: {
+                validVersions: [1, 2],
+                defaultVersion: 2,
+                vendorName: 'hapiservice'
+            }
+        },
+        {
+            register: require('hapi-auth-jwt2')
+        }];
 
-            // plugin registration
-            internals.registerPlugins(server);
+    server.register(plugins, (err) => {
 
-            // start the server
-            server.start()
-                .then(() => {
+        if (err){
+            console.log('error registering plugins', err);
+        }
 
-                    console.log('Server running at:', server.info.uri);
-                })
-                .catch((err) => {
-
-                    throw err;
-                });
-        })
-        .catch((err) => {
-
-            console.log('Error connecting to the database', err);
-            throw err;
+        // set JWT as the default auth strategy
+        server.auth.strategy('jwt', 'jwt', {
+            key: TokenValidator.secret,
+            validateFunc: TokenValidator.validate,
+            verifyOptions: { algorithms: ['HS256'] }
         });
+        server.auth.default('jwt');
+
+        server.start()
+            .then(internals.connectToDatabase)
+            .then(() =>  {
+                console.log('Server running at:', server.info.uri);
+            })
+            .catch((err) => {
+                console.log('Error initializing server', err);
+                //throw err;
+            });
+    });
 };
 
 internals.init();
