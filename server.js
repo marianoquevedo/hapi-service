@@ -25,7 +25,7 @@ internals.registerRoutes = function (server) {
 
 internals.connectToDatabase = function () {
 
-    const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/hapi-service';
+    const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/hapi-service';
 
     // native Node promises
     Mongoose.Promise = global.Promise;
