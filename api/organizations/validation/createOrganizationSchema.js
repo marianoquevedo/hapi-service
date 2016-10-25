@@ -11,7 +11,7 @@ internals.createOrganizationSchema = Joi.object({
     description: Joi.string().min(2).max(400).required(),
     url: Joi.string().uri().required(),
     code: Joi.string().alphanum().required(),
-    type: Joi.string().valid(internals.validTypes).insensitive().required()
+    type: Joi.string().valid(internals.validTypes).required()
 });
 
 module.exports = internals.createOrganizationSchema;

@@ -22,6 +22,7 @@ const organizationModel = new Schema({
     },
     type: {
         type: String,
+        enum: ['employer', 'insurance', 'health system'],
         required: true
     }
 }, {
