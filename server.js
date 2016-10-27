@@ -30,6 +30,9 @@ internals.init = function () {
         port: Number(process.env.PORT || 3000)
     });
 
+    // mongoose promises
+    Mongoose.Promise = global.Promise;
+
     // register routes
     internals.registerRoutes(server);
 
