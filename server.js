@@ -2,7 +2,6 @@
 'use strict';
 
 const Hapi = require('hapi');
-const Mongoose = require('mongoose');
 const Glob = require('glob');
 const Path = require('path');
 const TokenValidator = require(Path.join(__dirname, '/api/account/helpers/tokenValidator'));
@@ -21,16 +20,6 @@ internals.registerRoutes = function (server) {
         const route = require(Path.join(__dirname, file));
         server.route(route);
     });
-};
-
-internals.connectToDatabase = function () {
-
-    const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/hapi-service';
-
-    // native Node promises
-    Mongoose.Promise = global.Promise;
-
-    return Mongoose.connect(dbUrl);
 };
 
 internals.init = function () {
@@ -54,7 +43,14 @@ internals.init = function () {
         },
         {
             register: require('hapi-auth-jwt2')
-        }];
+        },
+        {
+            register: require('hapi-mongoose-db-connector'),
+            options: {
+                mongodbUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/hapi-service'
+            }
+        }
+    ];
 
     server.register(plugins, (err) => {
 
@@ -71,7 +67,6 @@ internals.init = function () {
         server.auth.default('jwt');
 
         server.start()
-            .then(internals.connectToDatabase)
             .then(() =>  {
 
                 console.log('Server running at:', server.info.uri);

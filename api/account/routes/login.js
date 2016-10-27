@@ -2,7 +2,8 @@
 
 const Joi = require('joi');
 const JWT = require('jsonwebtoken');
-const TokenValidator = require.main.require('./api/account/helpers/tokenValidator');
+const Path = require('path');
+const TokenValidator = require(Path.join(__dirname, '../helpers/tokenValidator.js'));
 
 const internals = {};
 
