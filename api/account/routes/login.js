@@ -9,7 +9,7 @@ const internals = {};
 
 internals.requestHandler = function (request, reply) {
 
-    // fixed login credentials
+    // fake login credentials
     if (request.payload.username === 'admin' && 
         request.payload.password === '123') {
 

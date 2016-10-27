@@ -56,8 +56,6 @@ internals.requestHandler = function (request, reply) {
 
     const apiVersion = request.pre.apiVersion;
 
-    console.log('apiVersion', apiVersion);
-
     return reply(internals.getOrganizations(apiVersion, request.query));
 };
 
