@@ -4,6 +4,7 @@
 const Hapi = require('hapi');
 const Glob = require('glob');
 const Path = require('path');
+const Mongoose = require('mongoose');
 const TokenValidator = require(Path.join(__dirname, '/api/account/helpers/tokenValidator'));
 
 const internals = {};
@@ -74,7 +75,6 @@ internals.init = function () {
             .catch((err) => {
 
                 console.log('Error initializing server', err);
-                //throw err;
             });
     });
 };
