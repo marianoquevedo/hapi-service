@@ -63,10 +63,17 @@ internals.init = function () {
         {
             register: HapiSwagger,
             options: {
+                pathPrefixSize: 2,
+                basePath: '/api/',
                 info: {
                     'title': 'Hapi API Documentation',
                     'version': Package.version
-                }
+                },
+                tags: [{
+                    'name': 'account'
+                },{
+                    'name': 'organizations'
+                }]
             }
         }
     ];
