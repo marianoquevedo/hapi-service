@@ -3,7 +3,7 @@
 const JWT = require('jsonwebtoken');
 const Path = require('path');
 const TokenValidator = require(Path.join(__dirname, '../helpers/tokenValidator'));
-const LoginSchema = require('../validation/LoginSchema');
+const LoginSchema = require(Path.join(__dirname, '../validation/LoginSchema'));
 
 const internals = {};
 
