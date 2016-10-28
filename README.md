@@ -48,7 +48,7 @@ To run the tests:
 npm test
 ```
 
-#### Versioning
+### Versioning
 
 The GET endpoints support versioning. The default version is 2, but you can request version 1 using the header:
 ```
@@ -56,7 +56,7 @@ accept: application/vnd.hapiservice.v1+json
 ```
 **Difference between versions:** version 1 endpoints will always return the `code` and `url` fields, even if the code parameter has not been sent by the client.
 
-#### JWT authentication
+### JWT authentication
 The endpoints are secured using JWT. To generate a token you need to login first using the endpoint:`/api/account/login`
 
 For now there is only one user that can login to the service:
