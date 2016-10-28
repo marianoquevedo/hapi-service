@@ -3,7 +3,8 @@
 const Joi = require('joi');
 const JWT = require('jsonwebtoken');
 const Path = require('path');
-const TokenValidator = require(Path.join(__dirname, '../helpers/tokenValidator.js'));
+const TokenValidator = require(Path.join(__dirname, '../helpers/tokenValidator'));
+const LoginSchema = require('../validation/LoginSchema');
 
 const internals = {};
 
@@ -31,11 +32,11 @@ module.exports = {
     handler: internals.requestHandler,
     config: {
         auth: false,
+        description: 'Authentication',
+        notes: 'API authentication. Returns a JWT for use in subsequent requests',
+        tags: ['api'],
         validate: {
-            payload: Joi.object({
-                username: Joi.string().required(),
-                password: Joi.string().required()
-            })
+            payload: LoginSchema
         }
     }
 };

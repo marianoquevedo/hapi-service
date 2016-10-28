@@ -1,6 +1,7 @@
 'use strict';
 
 const Boom = require('boom');
+const Joi = require('joi');
 const Organization = require('../model/Organization');
 const CreateOrganizationSchema = require('../validation/createOrganizationSchema');
 
@@ -31,8 +32,16 @@ module.exports = {
     method: 'POST',
     handler: internals.requestHandler,
     config: {
+        tags: ['api'],
+        description: 'Create',
+        notes: 'Saves an organization',
         validate: {
-            payload: CreateOrganizationSchema
+            payload: CreateOrganizationSchema,
+            headers: Joi.object().keys({
+                Authorization: Joi.string()
+                                  .description('Authorization token')
+                                  .default('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFkbWluIiwiaWF0IjoxNDc3NjE1MDUwfQ.dBG2q5RCxTdLBwCDC2oVUd_sFcRI5cgmHreLaalBSgM'),
+            }).unknown()
         }
     }
 };

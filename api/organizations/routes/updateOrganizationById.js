@@ -1,5 +1,6 @@
 'use strict';
 
+const Joi = require('joi');
 const Boom = require('boom');
 const Organization = require('../model/Organization');
 const UpdateOrganizationSchema = require('../validation/updateOrganizationSchema');
@@ -60,8 +61,19 @@ module.exports = {
     method: 'PUT',
     handler: internals.requestHandler,
     config: {
+        tags: ['api'],
+        description: 'Update',
+        notes: 'Updates the specified organization by setting the values of the parameters passed. Any parameters not provided will be left unchanged',
         validate: {
-            payload: UpdateOrganizationSchema
+            payload: UpdateOrganizationSchema,
+            params: {
+                id: Joi.string().description('the organization id')
+            },
+            headers: Joi.object().keys({
+                Authorization: Joi.string()
+                                  .description('Authorization token')
+                                  .default('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFkbWluIiwiaWF0IjoxNDc3NjE1MDUwfQ.dBG2q5RCxTdLBwCDC2oVUd_sFcRI5cgmHreLaalBSgM'),
+            }).unknown()
         }
     }
 };

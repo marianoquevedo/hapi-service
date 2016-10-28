@@ -2,9 +2,13 @@
 'use strict';
 
 const Hapi = require('hapi');
+const Inert = require('inert');
+const Vision = require('vision');
+const HapiSwagger = require('hapi-swagger');
 const Glob = require('glob');
 const Path = require('path');
 const Mongoose = require('mongoose');
+const Package = require('./package');
 const TokenValidator = require(Path.join(__dirname, '/api/account/helpers/tokenValidator'));
 
 const internals = {};
@@ -52,6 +56,17 @@ internals.init = function () {
             register: require('hapi-mongoose-db-connector'),
             options: {
                 mongodbUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/hapi-service'
+            }
+        },
+        Inert,
+        Vision,
+        {
+            register: HapiSwagger,
+            options: {
+                info: {
+                    'title': 'Hapi API Documentation',
+                    'version': Package.version
+                }
             }
         }
     ];
