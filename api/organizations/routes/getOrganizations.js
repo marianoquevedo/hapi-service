@@ -7,7 +7,7 @@ const Organization = require('../model/Organization');
 
 const internals = {};
 
-internals.outputFields = require('../helpers/outputFields');
+internals.outputFields = require('../util/outputFields');
 
 internals.getOrganizations = function (apiVersion, queryParams) {
 
@@ -76,7 +76,7 @@ module.exports = {
             headers: Joi.object().keys({
                 Authorization: Joi.string()
                                   .description('Authorization token')
-                                  .default('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFkbWluIiwiaWF0IjoxNDc3NjE1MDUwfQ.dBG2q5RCxTdLBwCDC2oVUd_sFcRI5cgmHreLaalBSgM'),
+                                  .default('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFkbWluIiwiaWF0IjoxNDc3NjI1MTU3fQ.ISQczg3OclurcE981oNuZVviVkhUZusAgO3uc3l0ExI'),
 
                 accept: Joi.string()
                            .description('API version')

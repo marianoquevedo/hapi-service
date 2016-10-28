@@ -5,7 +5,7 @@ const Lab = require('lab');
 const Path = require('path');
 const JWT = require('jsonwebtoken');
 const Mongoose = require('mongoose');
-const TokenValidator = require(Path.join(__dirname, '../api/account/helpers/tokenValidator.js'));
+const TokenValidator = require(Path.join(__dirname, '../api/account/util/tokenValidator.js'));
 const Organization = require(Path.join(__dirname, '../api/organizations/model/Organization.js'));
 const BootstrapServer = require(Path.join(__dirname, 'bootstrap.js'));
 

@@ -3,7 +3,7 @@
 const Hapi = require('hapi');
 const Glob = require('glob');
 const Path = require('path');
-const TokenValidator = require(Path.join(__dirname, '../api/account/helpers/tokenValidator.js'));
+const TokenValidator = require(Path.join(__dirname, '../api/account/util/tokenValidator.js'));
 
 module.exports = (callback) => {
 

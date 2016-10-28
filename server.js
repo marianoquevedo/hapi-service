@@ -9,7 +9,7 @@ const Glob = require('glob');
 const Path = require('path');
 const Mongoose = require('mongoose');
 const Package = require('./package');
-const TokenValidator = require(Path.join(__dirname, '/api/account/helpers/tokenValidator'));
+const TokenValidator = require(Path.join(__dirname, '/api/account/util/tokenValidator'));
 
 const internals = {};
 
