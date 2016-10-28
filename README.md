@@ -56,6 +56,16 @@ accept: application/vnd.hapiservice.v1+json
 ```
 **Difference between versions:** version 1 endpoints will always return the `code` and `url` fields, even if the code parameter has not been sent by the client.
 
+#### JWT authentication
+The endpoints are secured using JWT. To generate a token you need to login first using the endpoint:`/api/account/login`
+
+For now there is only one user that can login to the service:
+
+```
+user:admin
+password:123
+```
+
 ### Coding conventions
 
 The code has been written following the Hapi styleguide: http://hapijs.com/styleguide.
