@@ -4,6 +4,7 @@
 const Hapi = require('hapi');
 const Inert = require('inert');
 const Vision = require('vision');
+const Blipp = require('blipp');
 const HapiSwagger = require('hapi-swagger');
 const Glob = require('glob');
 const Path = require('path');
@@ -58,6 +59,7 @@ internals.init = function () {
                 mongodbUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/hapi-service'
             }
         },
+        Blipp,
         Inert,
         Vision,
         {
