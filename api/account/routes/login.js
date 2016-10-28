@@ -1,6 +1,5 @@
 'use strict';
 
-const Joi = require('joi');
 const JWT = require('jsonwebtoken');
 const Path = require('path');
 const TokenValidator = require(Path.join(__dirname, '../helpers/tokenValidator'));
@@ -11,7 +10,7 @@ const internals = {};
 internals.requestHandler = function (request, reply) {
 
     // fake login credentials
-    if (request.payload.username === 'admin' && 
+    if (request.payload.username === 'admin' &&
         request.payload.password === '123') {
 
         const user = {
