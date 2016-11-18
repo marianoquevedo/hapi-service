@@ -1,10 +1,12 @@
-# hapi-service
+# hapi-service    
 
 A RESTful service built with hapi
 
 Live demo: https://hapi-service.herokuapp.com/api
 
 API documentation: https://hapi-service.herokuapp.com/documentation
+
+[![Build Status](https://travis-ci.org/marianoquevedo/hapi-service.svg?branch=master)](https://travis-ci.org/marianoquevedo/hapi-service)
   
 ### Features
 
